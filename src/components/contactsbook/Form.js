@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import { FormEl, LabelFormEl, InputFormEl } from './Form.styled';
 import { useSelector, useDispatch } from 'react-redux';
+import { addContacts } from 'redux/operations';
 import { getContacts } from 'redux/contactSlice';
-import { addContact } from 'redux/contactSlice';
-import { nanoid } from 'nanoid';
 
 function Form() {
   const [name, setName] = useState('');
@@ -12,12 +11,13 @@ function Form() {
   const contacts = useSelector(getContacts);
 
   const formSubmitHandler = data => {
+    console.log(data);
+    console.log(contacts);
     if (contacts.filter(contact => contact.name === data.name).length > 0) {
       alert(`${data.name}  is already in contacts`);
       return;
     }
-    data.id = nanoid();
-    dispatch(addContact(data));
+    dispatch(addContacts(data));
   };
 
   const handleChange = event => {

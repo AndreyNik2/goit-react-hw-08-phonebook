@@ -6,7 +6,7 @@ export const App = () => {
   return (
     <div
       style={{
-        height: '100vh',
+        minHeight: '100vh',
         padding: '20px',
         backgroundColor: '#303235',
       }}>
