@@ -11,8 +11,6 @@ function Form() {
   const contacts = useSelector(getContacts);
 
   const formSubmitHandler = data => {
-    console.log(data);
-    console.log(contacts);
     if (contacts.filter(contact => contact.name === data.name).length > 0) {
       alert(`${data.name}  is already in contacts`);
       return;

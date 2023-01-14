@@ -6,6 +6,7 @@ width: 300px
 `;
 
 export const FilterLabel = styled.label`
+display: block;
 font-weight: 700;
 
 `;

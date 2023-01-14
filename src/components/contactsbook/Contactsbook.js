@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { ColorRing } from 'react-loader-spinner';
 import {
   TitlePhonebook,
   BoxPhonebook,
@@ -9,12 +10,12 @@ import ContactList from './ContactList';
 import Filter from './Filter';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { getContacts } from 'redux/contactSlice';
+import { getContacts, getIsLoading } from 'redux/contactSlice';
 import { fetchContacts } from 'redux/operations';
 
 function ContactsBook() {
   const contacts = useSelector(getContacts);
-  console.log(contacts);
+  const isLoading = useSelector(getIsLoading);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchContacts());
@@ -27,8 +28,17 @@ function ContactsBook() {
       <Form />
       <TitleContacts>Contacts</TitleContacts>
       <Filter />
+      <ColorRing
+        visible={Boolean(isLoading)}
+        height="80"
+        width="80"
+        ariaLabel="blocks-loading"
+        wrapperStyle={{}}
+        wrapperClass="blocks-wrapper"
+        colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+      />
       <ContactList />
-      {contacts.length === 0 && <p>Contactlist empty. Please add contact.</p>}
+      {contacts.length === 0 && !isLoading && <p>Contactlist empty. Please add contact.</p>}
     </BoxPhonebook>
   );
 }
