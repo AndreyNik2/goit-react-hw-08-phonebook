@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
 import { FormEl, LabelFormEl, InputFormEl } from './Form.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContacts } from 'redux/contacts/operations';
+import { editContacts } from 'redux/contacts/operations';
 import { getContacts } from 'redux/contacts/contactSlice';
 
-function Form() {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+function FormEdit({ contact }) {
+    console.log(contact);
+  const [name, setName] = useState(contact.name);
+  const [number, setNumber] = useState(contact.number);
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
 
+  const contactId = contact.id;
+
   const formSubmitHandler = data => {
-    if (contacts.filter(contact => contact.name === data.name).length > 0) {
+    if (contacts.filter(contact => contact.name === data.name).length > 0 ) {
       alert(`${data.name}  is already in contacts`);
       return;
     }
-    dispatch(addContacts(data));
+    dispatch(editContacts(data));
   };
 
   const handleChange = event => {
@@ -34,7 +37,7 @@ function Form() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    formSubmitHandler({ name, number });
+    formSubmitHandler({name, number, contactId})
     resetForm();
   };
 
@@ -70,9 +73,9 @@ function Form() {
         />
       </LabelFormEl>
 
-      <button type="submit">Add contact</button>
+      <button type="submit">Edit contact</button>
     </FormEl>
   );
 }
 
-export default Form;
+export default FormEdit;

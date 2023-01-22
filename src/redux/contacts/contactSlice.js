@@ -1,7 +1,13 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { addContacts, deleteContacts, fetchContacts } from './operations';
+import { logOut } from 'redux/auth/operations';
+import {
+  addContacts,
+  deleteContacts,
+  editContacts,
+  fetchContacts,
+} from './operations';
 
-const extraActions = [addContacts, deleteContacts, fetchContacts];
+const extraActions = [addContacts, deleteContacts, fetchContacts, editContacts];
 
 const getActions = type => isAnyOf(...extraActions.map(action => action[type]));
 
@@ -35,6 +41,12 @@ const anyRejectedReduser = (state, action) => {
   state.error = action.payload;
 };
 
+const isLogout = state => {
+  state.contacts = [];
+  state.isLoading = false;
+  state.error = null;
+};
+
 const contactSlice = createSlice({
   name: 'contacts',
   initialState: {
@@ -47,6 +59,11 @@ const contactSlice = createSlice({
       .addCase(fetchContacts.fulfilled, fetchContactsFulfilledReduser)
       .addCase(addContacts.fulfilled, addContactsFulfilledReduser)
       .addCase(deleteContacts.fulfilled, deleteContactsFulfilledReduser)
+      .addCase(logOut.fulfilled, isLogout)
+      .addCase(editContacts.fulfilled, (state, action) => {
+        console.log(action.payload);
+        console.log(state.contacts.contacts);
+      })
       .addMatcher(getActions('pending'), anyPendingReduser)
       .addMatcher(getActions('rejected'), anyRejectedReduser)
       .addMatcher(getActions('fulfilled'), anyFulfilledReduser),
