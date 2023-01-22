@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/266.fecd0efb.chunk.js","mappings":"kMAAe,SAASA,IACtB,OACE,2BACE,0BACE,4MAIP,C","sources":["pages/Home.js"],"sourcesContent":["export default function Home() {\n  return (\n    <main>\n      <div>\n        <h1>Здесь ты можешь хранить контакты</h1>\n      </div>\n    </main>\n  );\n}\n"],"names":["Home"],"sourceRoot":""}
