@@ -1,29 +1,12 @@
-import React, { useState } from 'react';
-import Modal from 'react-modal';
-import { ContactItem, DeleteButton, Contact, List } from './ContactList.styled';
+import { List } from './ContactList.styled';
 import { getFilter } from 'redux/contacts/filterSlice';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getContacts } from 'redux/contacts/contactSlice';
-import { deleteContacts } from 'redux/contacts/operations';
-import FormEdit from '../FormEdit';
+import { ContactItem } from '../ContactItem/ContactItem';
 
 
-const modalStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
-
-Modal.setAppElement('#root');
 
 const ContactList = () => {
-  const [onEditModal, setOnEditModal] = useState(null);
-  const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
 
@@ -34,46 +17,14 @@ const ContactList = () => {
     );
   };
 
-  const deleteContact = contactId => {
-    dispatch(deleteContacts(contactId));
-  };
 
-  const onClickEditContact = (contact) => {
-    setOnEditModal(contact);
-    console.log(onEditModal);
-    
-  };
-
-  const resetContact = () => {
-    setOnEditModal(null)
-  }
-  
 
   return (
     <>
       <List>
         {onFiltrationContact(contacts, filter).map(contact => (
-          <ContactItem key={contact.id}>
-            <Contact>
-              {contact.name}: {contact.number}
-            </Contact>
-            <DeleteButton
-              onClick={() => deleteContact(contact.id)}
-              type="button"
-            >
-              Delete
-            </DeleteButton>
-            <button onClick={onClickEditContact}>Edit</button>
-          </ContactItem>
+          <ContactItem key={contact.id} contact={contact} />
         ))}
-        <Modal
-          isOpen={onEditModal !== null}
-          onRequestClose={resetContact}
-          style={modalStyles}
-          shouldCloseOnEsc={onEditModal !== null}
-        >
-          <FormEdit contact={onEditModal} />
-        </Modal>
       </List>
     </>
   );

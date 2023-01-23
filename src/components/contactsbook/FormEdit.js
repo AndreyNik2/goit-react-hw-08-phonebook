@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { editContacts } from 'redux/contacts/operations';
 import { getContacts } from 'redux/contacts/contactSlice';
 
-function FormEdit({ contact }) {
+function FormEdit({ contact, closeModal }) {
   const [name, setName] = useState(contact.name);
   const [number, setNumber] = useState(contact.number);
   const dispatch = useDispatch();
@@ -14,7 +14,9 @@ function FormEdit({ contact }) {
 
   const formSubmitHandler = data => {
     console.log(data);
-    if (contacts.filter(contact => contact.name === data.name).length > 0 ) {
+    const otherContacts = contacts.filter(item => item.id !== data.contactId);
+    console.log(otherContacts);
+    if (otherContacts.filter(item => item.name === data.name).length > 0) {
       alert(`${data.name}  is already in contacts`);
       return;
     }
@@ -37,8 +39,9 @@ function FormEdit({ contact }) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    formSubmitHandler({name, number, contactId})
+    formSubmitHandler({ name, number, contactId });
     resetForm();
+    closeModal();
   };
 
   const resetForm = () => {
