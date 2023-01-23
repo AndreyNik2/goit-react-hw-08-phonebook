@@ -26,6 +26,12 @@ const deleteContactsFulfilledReduser = (state, action) => {
   state.contacts.splice(index, 1);
 };
 
+const editContactFulfilledReduser = (state, action) => {
+  state.contacts[
+    state.contacts.findIndex(contact => contact.id === action.payload.id)
+  ] = action.payload;
+};
+
 const anyPendingReduser = state => {
   state.isLoading = true;
   state.error = null;
@@ -60,10 +66,7 @@ const contactSlice = createSlice({
       .addCase(addContacts.fulfilled, addContactsFulfilledReduser)
       .addCase(deleteContacts.fulfilled, deleteContactsFulfilledReduser)
       .addCase(logOut.fulfilled, isLogout)
-      .addCase(editContacts.fulfilled, (state, action) => {
-        console.log(action.payload);
-        console.log(state.contacts.contacts);
-      })
+      .addCase(editContacts.fulfilled, editContactFulfilledReduser)
       .addMatcher(getActions('pending'), anyPendingReduser)
       .addMatcher(getActions('rejected'), anyRejectedReduser)
       .addMatcher(getActions('fulfilled'), anyFulfilledReduser),

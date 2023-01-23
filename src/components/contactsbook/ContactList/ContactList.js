@@ -38,14 +38,16 @@ const ContactList = () => {
     dispatch(deleteContacts(contactId));
   };
 
-  const onClickEditContact = () => {
-   setOnEditModal(true);
+  const onClickEditContact = (contact) => {
+    setOnEditModal(contact);
+    console.log(onEditModal);
     
   };
 
   const resetContact = () => {
     setOnEditModal(null)
   }
+  
 
   return (
     <>
@@ -62,16 +64,16 @@ const ContactList = () => {
               Delete
             </DeleteButton>
             <button onClick={onClickEditContact}>Edit</button>
-            <Modal
-              isOpen={onEditModal !== null}
-              onRequestClose={resetContact}
-              style={modalStyles}
-              shouldCloseOnEsc={onEditModal !== null}
-            >
-              <FormEdit contact={contact} />
-            </Modal>
           </ContactItem>
         ))}
+        <Modal
+          isOpen={onEditModal !== null}
+          onRequestClose={resetContact}
+          style={modalStyles}
+          shouldCloseOnEsc={onEditModal !== null}
+        >
+          <FormEdit contact={onEditModal} />
+        </Modal>
       </List>
     </>
   );
