@@ -1,8 +1,8 @@
 import { getFilter, changeFilter } from 'redux/contacts/filterSlice';
-import { FilterInput, FilterLabel } from './Filter.styled';
 import { useSelector, useDispatch } from 'react-redux';
+import { TextField, Typography } from '@mui/material';
 
-const Filter = ({ value, onChange }) => {
+const Filter = () => {
   const filter = useSelector(getFilter);
   const dispatch = useDispatch();
 
@@ -11,10 +11,16 @@ const Filter = ({ value, onChange }) => {
   };
 
   return (
-    <FilterLabel>
-      Find contacts by name:
-      <FilterInput type="text" value={filter} onChange={onChangeFilter} />
-    </FilterLabel>
+    <>
+      <Typography>Find contacts by name:</Typography>
+      <TextField
+        size="small"
+        label="Filter"
+        type="text"
+        value={filter}
+        onChange={onChangeFilter}
+      />
+    </>
   );
 };
 

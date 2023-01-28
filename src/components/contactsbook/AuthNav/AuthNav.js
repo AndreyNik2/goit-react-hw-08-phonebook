@@ -1,15 +1,31 @@
 import { NavLink } from 'react-router-dom';
+import { Button } from '@mui/material';
+// import * as yup from 'yup';
 
 
 export const AuthNav = () => {
+
+
+
   return (
     <div>
-      <NavLink to="/register">
+      <Button
+        variant="outlined"
+        color="primary"
+        component={NavLink}
+        to="/register"
+        sx={{ mr: 1 }}
+      >
         Register
-      </NavLink>
-      <NavLink to="/login">
+      </Button>
+      <Button
+        variant="outlined"
+        color="primary"
+        component={NavLink}
+        to="/login"
+      >
         Log In
-      </NavLink>
+      </Button>
     </div>
   );
 };

@@ -1,10 +1,5 @@
 import { useEffect } from 'react';
 import { ColorRing } from 'react-loader-spinner';
-import {
-  TitlePhonebook,
-  BoxPhonebook,
-  TitleContacts,
-} from './ContactsBook.styled';
 import Form from '../components/contactsbook/Form';
 import ContactList from '../components/contactsbook/ContactList/ContactList';
 import Filter from '../components/contactsbook/Filter';
@@ -12,6 +7,8 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { getContacts, getIsLoading } from 'redux/contacts/contactSlice';
 import { fetchContacts } from 'redux/contacts/operations';
+import { Box, CardMedia, Typography } from '@mui/material';
+import image from '../images/hexagonal-background.jpg';
 
 function ContactsBook() {
   const contacts = useSelector(getContacts);
@@ -23,25 +20,31 @@ function ContactsBook() {
 
   return (
     <main>
-      <BoxPhonebook>
-        <TitlePhonebook>Phonebook</TitlePhonebook>
-        <Form />
-        <TitleContacts>Contacts</TitleContacts>
-        <Filter />
-        <ColorRing
-          visible={Boolean(isLoading)}
-          height="80"
-          width="80"
-          ariaLabel="blocks-loading"
-          wrapperStyle={{}}
-          wrapperClass="blocks-wrapper"
-          colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-        />
-        <ContactList />
-        {contacts.length === 0 && !isLoading && (
-          <p>Contactlist empty. Please add contact.</p>
-        )}
-      </BoxPhonebook>
+      <CardMedia
+        image={image}
+        padding="20px"
+        sx={{ height: '100vh', marginTop: '5px' }}
+      >
+        <Box width="1200px" margin="0 auto">
+          <Typography variant="h6">Your contactbook</Typography>
+          <Form />
+          <Typography variant="h5">Contacts</Typography>
+          <Filter />
+          <ColorRing
+            visible={Boolean(isLoading)}
+            height="80"
+            width="80"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+          />
+          <ContactList />
+          {contacts.length === 0 && !isLoading && (
+            <p>Contactlist empty. Please add contact.</p>
+          )}
+        </Box>
+      </CardMedia>
     </main>
   );
 }
