@@ -64,7 +64,7 @@ function Form() {
     <form onSubmit={handleSubmit(handleSubmitForm)}>
       <TextField
         {...register('name')}
-        error={errors.name === null}
+        error={Boolean(errors.name?.message)}
         size="small"
         label="Name"
         onChange={handleChange}
@@ -80,7 +80,7 @@ function Form() {
       />
       <TextField
         {...register('number')}
-        error={errors.number === null}
+        error={Boolean(errors.number?.message)}
         size="small"
         label="Phone number"
         onChange={handleChange}

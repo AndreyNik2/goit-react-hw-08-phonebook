@@ -1,9 +1,9 @@
-import { Button, ListItem,  Typography } from '@mui/material';
+import { Button, ListItem, Typography } from '@mui/material';
 import { useState } from 'react';
 import Modal from 'react-modal';
 import { useDispatch } from 'react-redux';
 import { deleteContacts } from 'redux/contacts/operations';
-import FormEdit from '../FormEdit';
+import FormEdit from './FormEdit';
 
 export const ContactItem = ({ contact }) => {
   const [isModalOpen, setIsModalOpen] = useState(null);
@@ -36,10 +36,16 @@ export const ContactItem = ({ contact }) => {
 
   return (
     <ListItem>
-      <Typography sx={{ mr: 1 }} variant="subtitle1">
+      <Typography
+        sx={{ mr: 1, width: '100px', overflowWrap: 'anywhere' }}
+        variant="subtitle1"
+      >
         {contact.name}:
       </Typography>
-      <Typography sx={{ mr: 1 }} variant="subtitle1">
+      <Typography
+        sx={{ mr: 1, width: '150px', overflowWrap: 'anywhere' }}
+        variant="subtitle1"
+      >
         {contact.number}
       </Typography>
       <Button

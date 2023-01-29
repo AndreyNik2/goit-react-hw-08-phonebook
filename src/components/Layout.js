@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { Suspense } from 'react';
-import { AppBarContacts } from './AppBar/AppBar';
+import { AppBarContacts } from './AppBar';
 
 export const Layout = () => {
   return (

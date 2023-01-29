@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import { ColorRing } from 'react-loader-spinner';
-import Form from '../components/contactsbook/Form';
-import ContactList from '../components/contactsbook/ContactList/ContactList';
-import Filter from '../components/contactsbook/Filter';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { getContacts, getIsLoading } from 'redux/contacts/contactSlice';
 import { fetchContacts } from 'redux/contacts/operations';
 import { Box, CardMedia, Typography } from '@mui/material';
 import image from '../images/hexagonal-background.jpg';
+import ContactList from 'components/ContactList';
+import Filter from 'components/Filter';
+import Form from 'components/Form';
 
 function ContactsBook() {
   const contacts = useSelector(getContacts);

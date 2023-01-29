@@ -1,8 +1,8 @@
 import { getFilter } from 'redux/contacts/filterSlice';
 import { useSelector } from 'react-redux';
 import { getContacts } from 'redux/contacts/contactSlice';
-import { ContactItem } from '../ContactItem/ContactItem';
 import { List } from '@mui/material';
+import { ContactItem } from './ContactItem';
 
 const ContactList = () => {
   const contacts = useSelector(getContacts);
@@ -11,15 +11,12 @@ const ContactList = () => {
   const onFiltrationContact = (contacts, filter) => {
     const normalizedFilter = filter.toLowerCase();
     const filteredContacts = contacts.filter(contact =>
-      contact.name
-        .toLowerCase()
-        .includes(normalizedFilter)
+      contact.name.toLowerCase().includes(normalizedFilter)
     );
-    
-    return filteredContacts
-      .sort((firstContact, secondContacts) =>
-        firstContact.name.localeCompare(secondContacts.name)
-      )
+
+    return filteredContacts.sort((firstContact, secondContacts) =>
+      firstContact.name.localeCompare(secondContacts.name)
+    );
   };
 
   return (

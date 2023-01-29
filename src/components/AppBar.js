@@ -1,9 +1,8 @@
-import { Navigation } from 'components/contactsbook/Navigation/Navigation';
 import { useAuth } from 'hooks';
-import { AuthNav } from '../AuthNav/AuthNav';
-import { UserMenu } from '../UserMenu/UserMenu';
 import { AppBar, Box, Toolbar, Typography } from '@mui/material';
-
+import { Navigation } from './Navigation';
+import { UserMenu } from './UserMenu';
+import { AuthNav } from './AuthNav';
 
 export const AppBarContacts = () => {
   const { isLoggedIn } = useAuth();
