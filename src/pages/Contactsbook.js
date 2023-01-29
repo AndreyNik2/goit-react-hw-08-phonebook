@@ -26,9 +26,13 @@ function ContactsBook() {
         sx={{ height: '100vh', marginTop: '5px' }}
       >
         <Box width="1200px" margin="0 auto">
-          <Typography variant="h6">Your contactbook</Typography>
+          <Typography sx={{ pt: 2, pb: 2 }} variant="h4">
+            Your contactbook
+          </Typography>
           <Form />
-          <Typography variant="h5">Contacts</Typography>
+          <Typography variant="h5" sx={{ pt: 2, pb: 1 }}>
+            Contacts
+          </Typography>
           <Filter />
           <ColorRing
             visible={Boolean(isLoading)}
