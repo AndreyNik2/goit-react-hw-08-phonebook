@@ -19,7 +19,7 @@ export default function Register() {
             sx={{ textAlign: 'center', pt: 3 }}
           >
             <Typography variant="h2" sx={{ pb: 3 }}>
-              Registr a new acount
+              Register a new account.
             </Typography>
             <Helmet>
               <title>Registration</title>
